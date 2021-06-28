@@ -1,26 +1,79 @@
-import React from 'react'
+import React, {forwardRef, Ref, MouseEvent, useEffect} from 'react'
 import VideoProvider from './contexts/VideoContext'
 import SystemProvider from './contexts/SystemContext'
 import UploadProvider from './contexts/UploadContext'
 import Dashboard from './components/Dashboard'
 import VideoAsset from './types/sanity/VideoAsset'
+import Dialog from 'part:@sanity/components/dialogs/fullscreen'
+import { SanityDocument, SanityAssetDocument, SanityImageAssetDocument } from '@sanity/client'
+import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent'
+import {Box, Portal, ThemeProvider, ToastProvider, studioTheme, PortalProvider} from '@sanity/ui'
+import VideoResponse from './types/vimeo/VideoResponse'
 
 interface VimeoBrowserProps {
-  onClose: () => void,
-  onSelect: (doc: VideoAsset) => void,
-  tool: boolean
+  document: SanityDocument
+  onFocus: () => void
+  onChange: (event: any) => void
+  selectedAssets?: (SanityAssetDocument | SanityImageAssetDocument)[]
+  tool: string
 }
 
-const VimeoBrowser: React.FC<VimeoBrowserProps> = ({ onClose, onSelect, tool }) => {
-  return <div className="w-screen h-screen bg-gray-800 text-white">
-    <SystemProvider onClose={onClose} onSelect={onSelect} tool={tool}>
+const VimeoBrowser: React.FC<VimeoBrowserProps> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
+  // @ts-ignore
+  const { onFocus, onChange, tool } = props
+  const handleStopPropagation = (e: MouseEvent) => {
+    e.nativeEvent.stopImmediatePropagation()
+    e.stopPropagation()
+  }
+
+  const onSelect = (asset: VideoResponse) => {
+    const event = {
+      _type: 'vimeo.video',
+      _key: Math.random().toString(16).substring(3),
+      asset: {
+        _ref: asset.resource_key,
+        _type: "reference"
+      }
+    }
+    onChange(PatchEvent.from(asset ? set(event) : unset()))
+  }
+
+  return <SystemProvider onFocus={onFocus} onSelect={onSelect} tool={tool}>
       <VideoProvider>
         <UploadProvider >
-          <Dashboard />
+          <ThemeProvider scheme="dark" theme={studioTheme}>
+            <ToastProvider zOffset={60000}>
+              {tool ? 
+                  <Box ref={ref} className="h-full relative">
+                    <Dashboard />
+                  </Box>
+                : <Portal>
+                    <Box
+                      onDragEnter={handleStopPropagation}
+                      onDragLeave={handleStopPropagation}
+                      onDragOver={handleStopPropagation}
+                      onDrop={handleStopPropagation}
+                      onMouseUp={handleStopPropagation}
+                      ref={ref}
+                      style={{
+                        bottom: 0,
+                        height: 'auto',
+                        left: 0,
+                        position: 'fixed',
+                        top: 0,
+                        width: '100%',
+                        zIndex: 70000
+                      }}
+                    >
+                    <Dashboard />
+                    </Box>
+                  </Portal>
+              }
+            </ToastProvider>
+          </ThemeProvider>
         </UploadProvider>
       </VideoProvider>
     </SystemProvider>
-  </div>
-}
+})
 
 export default VimeoBrowser

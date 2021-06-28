@@ -4,7 +4,7 @@ export default {
   name: 'vimeo.videoAsset',
   type: 'object',
   title: 'Video asset',
-  input: App,
+  inputComponent: App,
   fields: [
     {
       type: 'string',

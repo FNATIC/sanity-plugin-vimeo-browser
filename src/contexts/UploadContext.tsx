@@ -25,7 +25,7 @@ export const UploadContext = createContext<UploadContextProps>({
   error: '',
   success: false,
   uploadFile: () => new Promise((resolve) => resolve()),
-  clearState: () => null
+  clearState: () => null,
 });
 
 const UploadProvider: React.FC = ({ children }) => {
@@ -47,7 +47,7 @@ const UploadProvider: React.FC = ({ children }) => {
     Vimeo.uploader.clearState()
   }
 
-  Vimeo.uploader.registerCallbacks(setSuccess, setProgress, setError)
+  Vimeo.uploader.registerCallbacks(setSuccess, setProgress, setError)    
 
   return (
     <UploadContext.Provider
@@ -62,7 +62,7 @@ const UploadProvider: React.FC = ({ children }) => {
         error,
         success,
         uploadFile,
-        clearState
+        clearState,
       }}
     >
       {children}

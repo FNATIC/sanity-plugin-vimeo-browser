@@ -32,7 +32,7 @@ export default {
     },
     {
       name: 'public_name',
-      type: string
+      type: 'string'
     }
   ]
 }

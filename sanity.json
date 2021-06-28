@@ -10,27 +10,27 @@
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/vimeo.picture.sizes.js"
+      "path": "./lib/schemas/vimeo.picture.size.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/vimeo.video.downloadQuality.js"
+      "path": "./lib/schemas/vimeo.video.downloadQuality.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/vimeo.video.pictures.js"
+      "path": "./lib/schemas/vimeo.video.pictures.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/vimeo.video.privacy.js"
+      "path": "./lib/schemas/vimeo.video.privacy.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/vimeo.videoAsset.js"
+      "path": "./lib/schemas/vimeo.videoAsset.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/vimeo.video.js"
+      "path": "./lib/schemas/vimeo.video.js"
     }
   ]
 }

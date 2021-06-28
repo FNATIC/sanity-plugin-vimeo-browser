@@ -5,8 +5,8 @@ import MODES from '../types/Modes';
 import Button from './common/Button';
 
 const TopBar: React.FC = () => {
-    const { mode, setMode } = useContext(SystemContext)
-
+    const { mode, setMode, onFocus } = useContext(SystemContext)
+    
     return (
       <div>
         <Button color="gray" onClick={() => Sanity.syncer.syncAllVideosWithSanity()}>
@@ -23,6 +23,9 @@ const TopBar: React.FC = () => {
           >
             Browse
           </Button>}
+          <Button onClick={onFocus}>
+            Close
+          </Button>
       </div>
     );
 };

@@ -4,6 +4,7 @@ export default {
   name: 'vimeo.video',
   type: 'document',
   title: 'Video asset reference',
+  inputComponent: App,
   fields: [
     {
       title: 'Video',
@@ -15,13 +16,8 @@ export default {
   ],
   preview: {
     select: {
-      playbackId: 'asset.playbackId',
-      status: 'asset.status',
-      duration: 'asset.data.duration',
-      thumbTime: 'asset.thumbTime',
-      filename: 'asset.filename',
-      playbackIds: 'asset.data.playback_ids'
-    },
-    // component: Preview
+      imageUrl: 'asset.pictures.sizes[1].link',
+      title: 'asset.name'
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Mutation, MutationEvent, SanityDocument } from "@sanity/client";
+import { MutationEvent } from "@sanity/client";
 import VideoResponse from "../../types/vimeo/VideoResponse";
 import Sanity from "../Sanity";
 
@@ -29,8 +29,6 @@ export class Paginator {
 
   constructor(sanity: typeof Sanity) {
     this.sanity = sanity
-    this.getTotalNumberOfVideos()
-    this.getVideos()
   }
 
   private get queryAndParams() {
@@ -46,10 +44,9 @@ export class Paginator {
     this.updatePagingState()
   }
 
-  private getVideos = async () => {
+  getVideos = async () => {
     const { query, params } = this.queryAndParams
     const initialData = await this.sanity.client.fetch(query, params) as VideoResponse[]
-    console.log(initialData)
     this.callCalbackAllVideosFn(initialData)
     this.updatePagingState()
     this.videos = this.getVideoAssetMap(initialData)

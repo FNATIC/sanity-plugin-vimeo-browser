@@ -6,7 +6,7 @@ import UploadProgress from './UploadProgress';
 
 const Uploader: React.FC = () => {
     const { fileToUpload, progress } = useContext(UploadContext)
-    console.log(progress)
+    
     return (
       <div className="m-auto">
         { progress > 0 ? <UploadProgress /> 

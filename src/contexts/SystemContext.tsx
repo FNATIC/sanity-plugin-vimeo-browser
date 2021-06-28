@@ -1,29 +1,33 @@
+import { Patch, PatchMutationOperation } from '@sanity/client';
 import React, { createContext, useState } from 'react';
 import MODES from '../types/Modes'
-import VideoAsset from '../types/sanity/VideoAsset';
+import VideoResponse from '../types/vimeo/VideoResponse';
 
 interface SystemContextProps {
   mode: MODES
   setMode: (mode: MODES) => void
   selecting: boolean
-  setSelecting: (selecting: boolean) => void
+  setSelecting: (selecting: boolean) => void,
+  onSelect: (asset: VideoResponse) => void,
+  onFocus: () => void
 }
 
 export const SystemContext = createContext<SystemContextProps>({
   mode: MODES.BROWSING,
   setMode: (mode) => null,
   selecting: false,
-  setSelecting: (selecting) => null
+  setSelecting: (selecting) => null,
+  onSelect: () => null,
+  onFocus: () => null
 });
 
 interface SystemProviderProps {
-  onClose: () => void,
-  onSelect: (doc: VideoAsset) => void,
-  tool: boolean
+  onFocus: () => void,
+  onSelect: (doc: VideoResponse) => void,
+  tool: string
 }
 
-const SystemProvider: React.FC<SystemProviderProps> = ({onClose, onSelect, tool, children }) => {
-  console.log(!tool)
+const SystemProvider: React.FC<SystemProviderProps> = ({onSelect, onFocus, tool, children }) => {
 
   const [mode, setMode] = useState<MODES>(MODES.BROWSING)
   const [selecting, setSelecting] = useState(!tool)
@@ -34,7 +38,9 @@ const SystemProvider: React.FC<SystemProviderProps> = ({onClose, onSelect, tool,
         mode,
         setMode,
         selecting,
-        setSelecting
+        setSelecting,
+        onSelect,
+        onFocus
       }}
     >
       {children}

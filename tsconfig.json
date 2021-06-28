@@ -7,7 +7,7 @@
       "es5"
     ],
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -17,8 +17,9 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "jsx": "react",
-    "outDir": "./lib"
+    "outDir": "./lib",
   },
+  "exclude": ["node_modules"],
   "include": [
     "./src",
     "./src/**/*.ts",

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import VimeoWrapper from '../services/Vimeo';
 import VideoResponse from '../types/vimeo/VideoResponse'
 import { PagingState } from '../services/sanity/Paginator'
@@ -15,7 +15,7 @@ interface VideoContextProps {
 export const VideoContext = createContext<VideoContextProps>({
   allVideos: [],
   setSelectedVideo: (video) => null,
-  loading: false
+  loading: false,
 });
 
 const VideoProvider: React.FC = ({ children }) => {
@@ -23,7 +23,7 @@ const VideoProvider: React.FC = ({ children }) => {
   const [selectedVideo, setSelectedVideo] = useState<VideoResponse | undefined>()
   const [pagingState, setPagingState] = useState<PagingState>()
   const [loading, setLoading] = useState(false)
-  
+
   Sanity.paginator.setCallbackFn(setPagingState, setAllVideos)
   VimeoWrapper.setLoadingCallback(setLoading)
 
@@ -34,7 +34,7 @@ const VideoProvider: React.FC = ({ children }) => {
         selectedVideo,
         setSelectedVideo,
         pagingState,
-        loading
+        loading,
       }}
     >
       {children}
