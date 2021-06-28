@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ext": "jsx,ts,tsx",
+  "exec": "tsc && npm run copyfiles && NODE_ENV=production rollup -c"
+}

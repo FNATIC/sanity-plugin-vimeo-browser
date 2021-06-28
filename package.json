@@ -1,0 +1,55 @@
+{
+  "name": "sanity-plugin-vimeo-browser",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Jesper Paulsen",
+    "email": "jesper@jesper.no"
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "copyfiles": "copyfiles -f src/styles/tailwind.css lib/styles/",
+    "build": "npm run clean && tsc && npm run copyfiles && NODE_ENV=production rollup -c",
+    "dev": "npm run clean && nodemon"
+  },
+  "peerDependencies": {
+    "@sanity/base": "^2.11.2",
+    "react": "^16.9 || ^17",
+    "react-dom": "^16.9 || ^17"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "react-dropzone": "^11.3.2",
+    "tus-js-client": "^2.3.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@sanity/base": "^2.11.2",
+    "@sanity/client": "^2.11.0",
+    "@sanity/types": "^2.11.0",
+    "@types/node": "^15.12.4",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "autoprefixer": "^10.2.6",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^2.0.7",
+    "postcss": "^8.3.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.52.3",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-postcss": "^4.0.0",
+    "tailwindcss": "^2.2.4",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  },
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "sanity-plugin",
+    "vimeo",
+    "browser"
+  ]
+}
