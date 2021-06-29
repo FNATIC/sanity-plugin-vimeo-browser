@@ -2,7 +2,7 @@ import App from '../App'
 
 export default {
   name: 'vimeo.videoAsset',
-  type: 'object',
+  type: 'document',
   title: 'Video asset',
   inputComponent: App,
   fields: [

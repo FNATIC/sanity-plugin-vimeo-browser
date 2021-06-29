@@ -1,7 +1,7 @@
 {
   "name": "@fnc/sanity-plugin-vimeo-browser",
   "description": "A Sanity Plugin for browsing and uploading vimeo videos",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": {
     "name": "Jesper Paulsen",
