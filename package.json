@@ -1,7 +1,7 @@
 {
   "name": "@fnc/sanity-plugin-vimeo-browser",
   "description": "A Sanity Plugin for browsing and uploading vimeo videos",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "author": {
     "name": "Jesper Paulsen",
@@ -13,6 +13,14 @@
     "type": "git",
     "url": "https://github.com/FNATIC/sanity-plugin-vimeo-browser"
   },
+  "files": [
+    "dist/",
+    "lib/",
+    "sanity.json",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "clean": "rimraf ./lib",
     "copyfiles": "copyfiles -f src/styles/tailwind.css lib/styles/ && copyfiles -f src/schemas/*.js lib/schemas/",
