@@ -24,10 +24,8 @@ const Dashboard: React.FC = () => {
 
     return (
       <div className="w-screen h-screen bg-gray-800 text-white">
-        <div className="m-auto p-2">
-        <div className="flex justify-end">
-         <TopBar />
-        </div>
+        <div className="m-auto p-2 max-w-7xl">
+        <TopBar />
           { loading ?  <LoadingSpinner /> :
             mode === MODES.BROWSING ? 
             <div>

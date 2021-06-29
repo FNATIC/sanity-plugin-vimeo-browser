@@ -37,7 +37,9 @@ const UploadProvider: React.FC = ({ children }) => {
   const [success, setSuccess] = useState(false)
 
   const uploadFile = async () => {
+    setProgress(5)
     if (fileToUpload) await Vimeo.uploader.uploadFile(fileToUpload, name, description)
+    setProgress(0)
   }
 
   const clearState = () => {

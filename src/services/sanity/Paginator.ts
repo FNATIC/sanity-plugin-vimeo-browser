@@ -47,6 +47,7 @@ export class Paginator {
   getVideos = async () => {
     const { query, params } = this.queryAndParams
     const initialData = await this.sanity.client.fetch(query, params) as VideoResponse[]
+    await this.getTotalNumberOfVideos()
     this.callCalbackAllVideosFn(initialData)
     this.updatePagingState()
     this.videos = this.getVideoAssetMap(initialData)
@@ -73,9 +74,7 @@ export class Paginator {
 
   private getVideoArray = (videos: { [id: string]: VideoResponse }) => {
     return Object.values(videos).sort((videoA, videoB) => {
-      const dateA = new Date(videoA.created_time)
-      const dateB = new Date(videoB.created_time)
-      return +dateB - +dateA
+      return videoB.modified_unix_time - videoA.modified_unix_time
     }).slice(0, this.paging.videosPerPage)
   }
 
@@ -98,7 +97,6 @@ export class Paginator {
   private callCalbackStateFn(state: PagingState) {
     if (!this.callbackStateFn) return console.error('No callback function for state provided. This is necessary to keep the application reactive.')
     
-    console.log('to')
     this.callbackStateFn(state)
   }
 

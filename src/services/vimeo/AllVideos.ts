@@ -29,11 +29,12 @@ class AllVideos {
   private stripVideo = (video: VideoResponse): VideoResponse => ({
     created_time: video.created_time,
     description: video.description,
-    download: video.download,
+    files: video.files,
     is_playable: video.is_playable,
     link: video.link,
     manage_link: video.manage_link,
     modified_time: video.modified_time,
+    modified_unix_time: new Date(video.modified_time).valueOf(),
     name: video.name,
     pictures: video.pictures,
     privacy: video.privacy,
@@ -50,6 +51,7 @@ class AllVideos {
     this.paging = response.paging
 
     const strippedVideos = []
+    console.log(response?.data[0])
     for (const video of response?.data) {
       strippedVideos.push(this.stripVideo(video))
     }

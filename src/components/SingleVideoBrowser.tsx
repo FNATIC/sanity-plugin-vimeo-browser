@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { SystemContext } from '../contexts/SystemContext';
 import VideoResponse from '../types/vimeo/VideoResponse';
+import Button from './common/Button'
 
 interface SingleVideoBrowserProps {
   video: VideoResponse

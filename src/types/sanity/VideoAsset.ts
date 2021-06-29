@@ -1,13 +1,14 @@
-import DownloadQuality from "../vimeo/DownloadQuality";
+import DownloadQuality from "../vimeo/File";
 import Pictures from "../vimeo/Pictures";
 import Privacy from "../vimeo/Privacy";
 import VideoResponse from "../vimeo/VideoResponse";
+import { SanityDocument } from "@sanity/client";
 
 export default class VideoAsset {
-  videoResponse: VideoResponse
+  videoAsset: SanityDocument<VideoResponse>
   
   constructor(video: VideoResponse) {
-    this.videoResponse = video
+    this.videoAsset = this.generateAsset(video)
   }
 
   private addTypeAndKeyToObject = (object: any, _type: string) => ({ 
@@ -36,16 +37,17 @@ export default class VideoAsset {
   }
 
 
-  generateAsset = () => {
+  private generateAsset = (video: VideoResponse): SanityDocument<VideoResponse> => {
     const base = {
-      ...this.videoResponse,
-      _createdAt: this.videoResponse.created_time,
-      _updatedAt: this.videoResponse.modified_time,
-      _id: this.videoResponse.resource_key,
-      _type: 'vimeo.videoAsset'
+      ...video,
+      _createdAt: video.created_time,
+      _updatedAt: video.modified_time,
+      _id: video.resource_key,
+      _type: 'vimeo.videoAsset',
+      _rev: ''
     }
 
-    base.download = this.generateDownloadObject(base.download)
+    base.files = this.generateDownloadObject(base.files)
     base.pictures = this.generatePicturesObject(base.pictures)
     base.privacy = this.generatePrivacyObject(base.privacy)
     return base

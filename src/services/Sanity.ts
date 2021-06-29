@@ -39,7 +39,7 @@ class Sanity {
 
 
   createVimeoAsset = async (video: VideoResponse) => {
-    const videoDoc = new VideoAsset(video).generateAsset()
+    const videoDoc = new VideoAsset(video)
     try {
       await this.client.createIfNotExists(videoDoc)
     } catch (e) {
@@ -48,9 +48,9 @@ class Sanity {
   }
 
   createOrUpdateVimeoAsset = async (video: VideoResponse) => {
-    const videoDoc = new VideoAsset(video).generateAsset()
+    const videoDoc = new VideoAsset(video)
     try {
-      await this.client.createOrReplace(videoDoc)
+      await this.client.createOrReplace(videoDoc.videoAsset)
     } catch (e) {
       console.error(e)
     }

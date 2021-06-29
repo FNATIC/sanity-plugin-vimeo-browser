@@ -1,7 +1,11 @@
 export default {
-  name: 'vimeo.video.downloadQuality',
+  name: 'vimeo.video.file',
   type: 'object',
   fields: [
+    {
+      name: 'fps',
+      type: 'number'
+    },
     {
       name: 'quality',
       type: 'string'

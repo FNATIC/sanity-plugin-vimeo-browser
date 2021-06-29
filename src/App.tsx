@@ -55,15 +55,7 @@ const VimeoBrowser: React.FC<VimeoBrowserProps> = forwardRef((props, ref: Ref<HT
                       onDrop={handleStopPropagation}
                       onMouseUp={handleStopPropagation}
                       ref={ref}
-                      style={{
-                        bottom: 0,
-                        height: 'auto',
-                        left: 0,
-                        position: 'fixed',
-                        top: 0,
-                        width: '100%',
-                        zIndex: 70000
-                      }}
+                      className="bottom-0 h-auto left-0 fixed top-0 w-full z-800000"
                     >
                     <Dashboard />
                     </Box>

@@ -14,7 +14,7 @@
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "./lib/schemas/vimeo.video.downloadQuality.js"
+      "path": "./lib/schemas/vimeo.video.file.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",

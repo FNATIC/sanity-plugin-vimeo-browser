@@ -1,3 +1,5 @@
+import { SanityDocument } from "@sanity/client"
+import VideoAsset from "../../types/sanity/VideoAsset"
 import VideoResponse from "../../types/vimeo/VideoResponse"
 import Sanity from "../Sanity"
 import Vimeo from "../Vimeo"
@@ -25,12 +27,12 @@ export class Syncer {
     return this.sanity.createOrUpdateVimeoAsset(videoToSync)
   }
 
-  private checkIfVideoHasBeenModified = (videoToSync: VideoResponse, videoAllreadySynced: VideoResponse) => new Date(videoAllreadySynced.modified_time) < new Date(videoToSync.modified_time)
+  private checkIfVideoHasBeenModified = (videoToSync: VideoResponse, videoAllreadySynced: VideoResponse) => videoAllreadySynced.modified_unix_time < videoToSync.modified_unix_time
 
   private syncOrSkipVideo = async (videoToSync: VideoResponse, videoAllreadySynced: VideoResponse) => {
     if (!videoAllreadySynced) return this.syncVideo(videoToSync)
     if (this.checkIfVideoHasBeenModified(videoToSync, videoAllreadySynced)) return this.syncVideo(videoToSync)
-    console.log(`Skipping video with id ${videoToSync.resource_key}`)
+    return console.log(`Skipping video with id ${videoToSync.resource_key}`)
   }
 
   private deleteVideo = (videoIdToDelete: string) => {

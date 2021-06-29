@@ -16,8 +16,8 @@ export default {
     },
     {
       type: 'array',
-      name: 'download',
-      of: [{ type: 'vimeo.video.downloadQuality' }]
+      name: 'file',
+      of: [{ type: 'vimeo.video.file' }]
     },
     {
       type: 'boolean',

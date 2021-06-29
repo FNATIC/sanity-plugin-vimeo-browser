@@ -5,27 +5,33 @@ import MODES from '../types/Modes';
 import Button from './common/Button';
 
 const TopBar: React.FC = () => {
-    const { mode, setMode, onFocus } = useContext(SystemContext)
+    const { mode, setMode, onFocus, selecting } = useContext(SystemContext)
     
     return (
-      <div>
-        <Button color="gray" onClick={() => Sanity.syncer.syncAllVideosWithSanity()}>
-          Sync with Vimeo
-        </Button>
-        {mode === MODES.BROWSING ?
-          <Button
-            onClick={() => setMode(MODES.UPLOADING)}
-          >
-            Upload
+      <div className="flex justify-between pb-2">
+        <div className="pl-2">
+          <Button color="gray" onClick={() => Sanity.syncer.syncAllVideosWithSanity()}>
+            Sync with Vimeo
           </Button>
-        : <Button
-            onClick={() => setMode(MODES.BROWSING)}
-          >
-            Browse
-          </Button>}
-          <Button onClick={onFocus}>
+          {mode === MODES.BROWSING ?
+            <Button
+              color="green" 
+              onClick={() => setMode(MODES.UPLOADING)}
+            >
+              Upload
+            </Button>
+          : <Button
+              color="green"
+              onClick={() => setMode(MODES.BROWSING)}
+            >
+              Browse
+            </Button>}
+        </div>
+        <div>
+          {selecting && <Button onClick={onFocus}>
             Close
-          </Button>
+          </Button>}
+        </div>
       </div>
     );
 };

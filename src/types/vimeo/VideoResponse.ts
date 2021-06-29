@@ -1,15 +1,16 @@
-import DownloadQuality from "./DownloadQuality";
+import DownloadQuality from "./File";
 import Pictures from "./Pictures";
 import Privacy from "./Privacy";
 
 export default interface VideoResponse {
   created_time: string
   description: string
-  download: DownloadQuality[]
+  files: DownloadQuality[]
   is_playable: boolean
   link: string
   manage_link: string
   modified_time: string
+  modified_unix_time: number
   name: string
   pictures: Pictures
   privacy: Privacy
