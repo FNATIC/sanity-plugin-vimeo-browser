@@ -1,7 +1,7 @@
 {
   "name": "@fnc/sanity-plugin-vimeo-browser",
   "description": "A Sanity Plugin for browsing and uploading vimeo videos",
-  "version": "1.0.4",
+  "version": "1.0.9",
   "license": "MIT",
   "author": {
     "name": "Jesper Paulsen",
@@ -19,11 +19,12 @@
     "sanity.json",
     "CHANGELOG.md",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "Icon.svg"
   ],
   "scripts": {
     "clean": "rimraf ./lib",
-    "copyfiles": "copyfiles -f src/styles/tailwind.css lib/styles/ && copyfiles -f src/schemas/*.js lib/schemas/",
+    "copyfiles": "copyfiles -f src/styles/tailwind.css lib/styles/ && copyfiles -f src/schemas/*.js lib/schemas/ && copyfiles -f src/icon/Icon.svg lib/icon",
     "build": "npm run clean && tsc && npm run copyfiles && NODE_ENV=production rollup -c",
     "dev": "npm run clean && nodemon"
   },
@@ -56,6 +57,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.52.3",
     "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-svg": "^2.0.0",
     "tailwindcss": "^2.2.4",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.2"

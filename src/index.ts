@@ -1,15 +1,15 @@
 import VimeoBrowser from "./App";
 import Vimeo from "./services/Vimeo";
-import Sanity from "./services/Sanity"
 import './styles/tailwind.css'
-
+import Icon from './icon/Icon'
 const setApiKey = Vimeo.setApiKey
 
 
 export { setApiKey }
 
 export default {
-  name: 'vimeoBrowser',
-  title: 'Vimeo Browser',
+  name: 'vimeo',
+  title: 'Vimeo',
   component: VimeoBrowser,
+  icon: Icon
 }

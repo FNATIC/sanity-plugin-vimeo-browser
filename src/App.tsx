@@ -19,7 +19,6 @@ interface VimeoBrowserProps {
 }
 
 const VimeoBrowser: React.FC<VimeoBrowserProps> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
-  // @ts-ignore
   const { onFocus, onChange, tool } = props
   const handleStopPropagation = (e: MouseEvent) => {
     e.nativeEvent.stopImmediatePropagation()
