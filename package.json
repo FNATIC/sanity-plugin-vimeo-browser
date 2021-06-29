@@ -1,10 +1,17 @@
 {
-  "name": "sanity-plugin-vimeo-browser",
+  "name": "@fnc/sanity-plugin-vimeo-browser",
+  "description": "A Sanity Plugin for browsing and uploading vimeo videos",
   "version": "1.0.0",
   "license": "MIT",
   "author": {
     "name": "Jesper Paulsen",
     "email": "jesper@jesper.no"
+  },
+  "main": "dist/bundle.js",
+  "source": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FNATIC/sanity-plugin-vimeo-browser"
   },
   "scripts": {
     "clean": "rimraf ./lib",
@@ -40,7 +47,6 @@
     "postcss": "^8.3.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.52.3",
-    "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.0",
     "tailwindcss": "^2.2.4",
     "ts-node": "^10.0.0",
