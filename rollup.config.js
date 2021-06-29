@@ -1,5 +1,4 @@
 import postcss from "rollup-plugin-postcss";
-import livereload from 'rollup-plugin-livereload'
 
 export default {
   input: "lib/index.js",
