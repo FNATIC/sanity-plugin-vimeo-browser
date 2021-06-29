@@ -6,8 +6,6 @@ import { Paginator } from './sanity/Paginator'
 
 const isContentLakeSupported = typeof sanityClient.withConfig === 'function'
 
-// const config = { apiVersion: '2021-05-17', dataset: import.meta.env.VITE_SANITY_DATASET, projectId: import.meta.env.VITE_SANITY_PROJECT_ID, token: import.meta.env.VITE_SANITY_API_TOKEN, useCdn: false }
-
 interface Config {
   apiVersion: string,
   dataset: string,
@@ -22,13 +20,9 @@ class Sanity {
   query = `*[_type == "vimeo.videoAsset"]`
 
   constructor() {
-    // TODO: Change client type
     this.client = isContentLakeSupported
       ? sanityClient.withConfig({ apiVersion: '2021-05-17' })
       : sanityClient
-    console.log(this.client)
-    // @ts-ignore
-    // this.client = sanityClient(config)
     this.syncer = new Syncer(this)
     this.paginator = new Paginator(this)
   }

@@ -84,7 +84,7 @@ export class Uploader {
         onProgress: (bytesUploaded, bytesTotal) => {
             const percentage = bytesUploaded / bytesTotal * 100
             console.log(bytesUploaded, bytesTotal, percentage + "%")
-            if (this.onProgressCallback) this.onProgressCallback(percentage)
+            if (this.onProgressCallback && percentage > 5) this.onProgressCallback(percentage)
         },
         onSuccess: async () => {
             console.log("Download %s from %s", this.currentTusUpload?.url)

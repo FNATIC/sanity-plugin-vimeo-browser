@@ -28,6 +28,7 @@ class AllVideos {
   // We strip the video here, so we don't upload too much to Sanity
   private stripVideo = (video: VideoResponse): VideoResponse => ({
     created_time: video.created_time,
+    created_unix_time: new Date(video.created_time).valueOf(),
     description: video.description,
     files: video.files,
     is_playable: video.is_playable,
@@ -51,7 +52,6 @@ class AllVideos {
     this.paging = response.paging
 
     const strippedVideos = []
-    console.log(response?.data[0])
     for (const video of response?.data) {
       strippedVideos.push(this.stripVideo(video))
     }

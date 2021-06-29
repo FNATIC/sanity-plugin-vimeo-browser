@@ -74,7 +74,7 @@ export class Paginator {
 
   private getVideoArray = (videos: { [id: string]: VideoResponse }) => {
     return Object.values(videos).sort((videoA, videoB) => {
-      return videoB.modified_unix_time - videoA.modified_unix_time
+      return videoA.created_unix_time - videoB.created_unix_time
     }).slice(0, this.paging.videosPerPage)
   }
 

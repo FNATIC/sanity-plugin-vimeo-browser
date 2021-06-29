@@ -1,5 +1,5 @@
 import postcss from "rollup-plugin-postcss";
-import svg from 'rollup-plugin-svg'
+import svgr from '@svgr/rollup'
 
 export default {
   input: "lib/index.js",
@@ -21,7 +21,7 @@ export default {
         insertAt: "top",
       },
     }),
-    svg()
+    svgr()
   ]
   /*
   plugins: [

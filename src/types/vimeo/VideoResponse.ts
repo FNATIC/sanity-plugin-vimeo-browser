@@ -4,6 +4,7 @@ import Privacy from "./Privacy";
 
 export default interface VideoResponse {
   created_time: string
+  created_unix_time: number
   description: string
   files: DownloadQuality[]
   is_playable: boolean
