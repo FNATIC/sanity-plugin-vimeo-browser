@@ -4,7 +4,7 @@
 
 **Disclaimer: This plugin is very WIP and it's API might change in the future**
 
-![Demo picture](https://github.com/fnatic/sanity-plugin-vimeo-browser/blob/master/docs/Demo.png?raw=true)
+![Demo picture](https://github.com/FNATIC/sanity-plugin-vimeo-browser/blob/master/docs/Demo.png?raw=true)
 
 ## Installation
 
