@@ -12,6 +12,8 @@
   sanity install @fnc/sanity-plugin-vimeo-browser
 ```
 
+Add `vimeo.video` to the schemas where you want to have video support.
+
 Make sure to add an env variable called SANITY_STUDIO_VIMEO_TOKEN. Generate this token via the Vimeo dashboard (Requires Vimeo Pro). It needs access to the scopes `private create upload video_files public`.
 
 ## Development
