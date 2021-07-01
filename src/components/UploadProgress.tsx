@@ -14,7 +14,7 @@ const UploadProgress = () => {
           We're currently uploading your video to Vimeo and adding it to Sanity.
         </div>
         <div className="flex justify-center text-lg">
-          Progress: {progress}
+          Progress: {progress.toFixed(2)} %
         </div>
         </>}
         {

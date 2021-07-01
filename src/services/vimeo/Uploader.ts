@@ -89,6 +89,7 @@ export class Uploader {
         onSuccess: async () => {
             console.log("Download %s from %s", this.currentTusUpload?.url)
             await Sanity.syncer.syncAllVideosWithSanity()
+            await Sanity.paginator.getVideos()
             if (!this.onSuccessCallback) return console.error('No onSuccess callback was registered.')
             this.onSuccessCallback(true)
         }

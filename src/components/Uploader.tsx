@@ -5,11 +5,11 @@ import UploadButton from './UploadButton';
 import UploadProgress from './UploadProgress';
 
 const Uploader: React.FC = () => {
-    const { fileToUpload, progress } = useContext(UploadContext)
+    const { fileToUpload, progress, uploadInProgress } = useContext(UploadContext)
     
     return (
       <div className="m-auto">
-        { progress > 0 ? <UploadProgress /> 
+        { uploadInProgress? <UploadProgress /> 
         : fileToUpload ? <PreviewVideo />
           : <UploadButton />
         }

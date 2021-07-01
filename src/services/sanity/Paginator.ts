@@ -44,6 +44,12 @@ export class Paginator {
     this.updatePagingState()
   }
 
+  get videoArray() {
+    return Object.values(this.videos).sort((videoA, videoB) => {
+      return videoB.created_unix_time - videoA.created_unix_time
+    }).slice(0, this.paging.videosPerPage)
+  }
+
   getVideos = async () => {
     const { query, params } = this.queryAndParams
     const initialData = await this.sanity.client.fetch(query, params) as VideoResponse[]
@@ -57,9 +63,11 @@ export class Paginator {
   private registerPaginatorSubscription = async () => {
     const { query, params } = this.queryAndParams
     if (videosSubscription) videosSubscription.unsubscribe()
-    videosSubscription = this.sanity.client.listen(query, params).subscribe((data: MutationEvent<VideoResponse>) => {
-      this.getTotalNumberOfVideos()
-      this.updateVideos(data)
+    videosSubscription = this.sanity.client.listen(query, params).subscribe(async (data: MutationEvent<VideoResponse>) => {
+      // When the logic for updating videos on the go is implemented, we can uncomment these again
+      // this.getTotalNumberOfVideos()
+      // this.updateVideos(data)
+      await this.getVideos()
       this.updatePagingState()
     })
   }
@@ -72,21 +80,18 @@ export class Paginator {
     return res
   }
 
-  private getVideoArray = (videos: { [id: string]: VideoResponse }) => {
-    return Object.values(videos).sort((videoA, videoB) => {
-      return videoA.created_unix_time - videoB.created_unix_time
-    }).slice(0, this.paging.videosPerPage)
-  }
+  // private fetchNewVideo = ()
 
   private updateVideos(event: MutationEvent<VideoResponse>) {
     const tmpVideos = { ...this.videos }
+    // TODO: Implement logic for fetching new videos when we delete one here
     if (event.transition === 'disappear') {
       delete tmpVideos[event.documentId]
     } else if (event.result) {
       tmpVideos[event.documentId] = event.result
     }
-    this.callCalbackAllVideosFn(this.getVideoArray(tmpVideos))
     this.videos = tmpVideos
+    this.callCalbackAllVideosFn(this.videoArray)
   }
 
   setCallbackFn(callbackStateFn: (state: PagingState) => void, callbackAllVideosFn: (videos: VideoResponse[]) => void) {

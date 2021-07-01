@@ -13,6 +13,7 @@ interface UploadContextProps {
   success: boolean
   uploadFile: () => Promise<void>
   clearState: () => void
+  uploadInProgress: boolean
 }
 
 export const UploadContext = createContext<UploadContextProps>({
@@ -26,6 +27,7 @@ export const UploadContext = createContext<UploadContextProps>({
   success: false,
   uploadFile: () => new Promise((resolve) => resolve()),
   clearState: () => null,
+  uploadInProgress: false
 });
 
 const UploadProvider: React.FC = ({ children }) => {
@@ -35,17 +37,22 @@ const UploadProvider: React.FC = ({ children }) => {
   const [description, setDescription] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [uploadInProgress, setUploadInProgress] = useState(false)
 
   const uploadFile = async () => {
-    setProgress(5)
+    setUploadInProgress(true)
     if (fileToUpload) await Vimeo.uploader.uploadFile(fileToUpload, name, description)
-    setProgress(0)
   }
+
+  useEffect(() => {
+    if (progress === 0) setUploadInProgress(false)
+  }, [progress])
 
   const clearState = () => {
     setName('')
     setDescription('')
     setFileToUpload(undefined)
+    setUploadInProgress(false)
     Vimeo.uploader.clearState()
   }
 
@@ -65,6 +72,7 @@ const UploadProvider: React.FC = ({ children }) => {
         success,
         uploadFile,
         clearState,
+        uploadInProgress
       }}
     >
       {children}
