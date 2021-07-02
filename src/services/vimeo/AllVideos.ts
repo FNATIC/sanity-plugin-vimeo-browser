@@ -1,6 +1,7 @@
 import AllVideosResponse from "../../types/vimeo/AllVideosResponse"
 import VideoResponse from "../../types/vimeo/VideoResponse"
 import Vimeo from "../Vimeo"
+import File from '../../types/vimeo/File'
 
 class AllVideos {
   baseUrl = '/me/videos'
@@ -25,12 +26,14 @@ class AllVideos {
     return res
   }
 
+  sortFiles = (files: File[]) => files.sort((fileA, fileB) => fileB.size - fileA.size)
+
   // We strip the video here, so we don't upload too much to Sanity
   private stripVideo = (video: VideoResponse): VideoResponse => ({
     created_time: video.created_time,
     created_unix_time: new Date(video.created_time).valueOf(),
     description: video.description,
-    files: video.files,
+    files: this.sortFiles(video.files),
     is_playable: video.is_playable,
     link: video.link,
     manage_link: video.manage_link,
